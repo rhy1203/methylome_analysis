@@ -1,0 +1,12 @@
+BiocManager::install("karyoploteR",force=TRUE)
+library(karyoploteR)
+custom.genome <- toGRanges("Chromosome_length.txt")
+oPK <- toGRanges("oPK_methylated_gene.gff3")
+yPK <- toGRanges("yPK_methylated_gene.gff3")
+
+print(kp <- plotKaryotype(genome=custom.genome,ideogram.plotter = NULL, plot.type=2))
+kpAddCytobandsAsLine(kp)
+kpPlotRegions(kp, data=oPK,col="#c38452",avoid.overlapping = FALSE, r0=0, r1=0.5,data.panel=2)
+kpPlotRegions(kp, data=yPK,col="#b5cf49",avoid.overlapping = FALSE,r0=0, r1=0.5)
+kpAddLabels(kp, "oPK", cex=0.5, col="#c38452",data.panel=2)
+kpAddLabels(kp, "yPK",  cex=0.5, col="#b5cf49")
